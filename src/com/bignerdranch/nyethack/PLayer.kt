@@ -1,14 +1,17 @@
+package com.bignerdranch.nyethack
+
 class PLayer {
     var name = "madrigal"
         get() = field.capitalize()
-        private set(value) {
+        private
+         set(value) {
             field = value.trim()
         }
     var healthPoints = 89
     val isBlessed = true
     private val isImmortal = false
 
-    private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean): String {
+    fun auraColor(): String {
         val auraVisible = isBlessed && healthPoints > 50 || isImmortal
         val auraColor = if (auraVisible) "GREEN" else "NONE"
         return auraColor
@@ -16,7 +19,7 @@ class PLayer {
 
 
 
-    private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
+    fun formatHealthStatus() =
         when (healthPoints) {
             100 -> " is in excellent condition!"
             in 90..99 -> " has a few scratches."
