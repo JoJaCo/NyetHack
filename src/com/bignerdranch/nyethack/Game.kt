@@ -4,10 +4,7 @@ fun main(args: Array<String>) {
 
 
 
-    val player = PLayer("Madrigal",
-        89,
-        true,
-        false)
+    val player = PLayer("Madrigal")
     player.castFireball()
 
 //    //anonymous aka lambdas

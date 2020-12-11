@@ -1,18 +1,37 @@
 package com.bignerdranch.nyethack
 
+import java.io.File
+
 class PLayer (_name:String,
-              _healthPoints:Int,
-              _isBlessed: Boolean,
-              _isImmortal: Boolean){
+              var healthPoints:Int = 100,
+              var isBlessed: Boolean,
+              private val isImmortal: Boolean){
     var name = _name
-        get() = field.capitalize()
+        get() = "${field.capitalize()} of $homeTown"
         private
          set(value) {
             field = value.trim()
         }
-    var healthPoints = _healthPoints
-    val isBlessed = _isBlessed
-    private val isImmortal = _isImmortal
+    val homeTown = selectedHometown()
+    private fun selectedHometown() = File("data/towns.txt")
+        .readText()
+        .split("/n")
+        .shuffled()
+        .first()
+
+
+    init {
+        require(healthPoints > 0, {"healpoints must be greater than zero"})
+        require(name.isNotBlank(), {"Player must have a name."})
+    }
+
+    constructor(name: String): this(name,
+    isBlessed = true,
+    isImmortal = false){
+        if (name.toLowerCase() == "kar") healthPoints = 40
+    }
+
+
 
     fun auraColor(): String {
         val auraVisible = isBlessed && healthPoints > 50 || isImmortal
