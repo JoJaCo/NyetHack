@@ -8,14 +8,13 @@ class PLayer (_name:String,
               private val isImmortal: Boolean){
     var name = _name
         get() = "${field.capitalize()} of $homeTown"
-        private
-         set(value) {
+        private set(value) {
             field = value.trim()
         }
-    val homeTown = selectedHometown()
+    val homeTown by lazy {   selectedHometown()}
     private fun selectedHometown() = File("data/towns.txt")
         .readText()
-        .split("/n")
+        .split("\n")
         .shuffled()
         .first()
 
